@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Web Page!</title>
+        <!--The line below tell the browser that the width is rendered equal to the width of the device.
+            This prevents the text to be rendered very small. Always put it in the html for modile responsive pages.-->
+        <meta name="viewport" content="width=devide-width, initial-scale=1.0">
+        <style>
+            @media (min-width: 700px) { /* styling only applies when min-width of media is 700px wide */
+                h1::before {
+                    content: "Welcome to my web page!";
+                }
+            }
+            @media (max-width: 699px) { /* smaller window */
+                h1::before {
+                    content: "Welcome!";
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h1></h1>
+    </body>
+</html>

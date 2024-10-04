@@ -1,0 +1,26 @@
+.error, .warning, .success { /* creating a tempelate */
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+}
+
+.success {
+  /* inherit from message tempelate and extend it by adding some modifications */
+  background-color: lightgreen;
+  border: 1px solid lightgreen;
+}
+
+.warning {
+  background-color: lightgoldenrodyellow;
+  border: 1px solid lightgoldenrodyellow;
+}
+
+.error {
+  background-color: lightcoral;
+  border: 1px solid lightcoral;
+}
+
+/*# sourceMappingURL=inheritance.css.map */

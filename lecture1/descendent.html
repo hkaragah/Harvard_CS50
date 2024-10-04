@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Web Page!</title>
+        <!--descendent: style 'li' tags contained within 'ol' tags -->
+        <style>
+            ol li { /* style 'li' tags contained within 'ol' tags */
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <ol>
+            <li>list item one</li> <!--immediate child of ol-tag-->
+            <li>list item two</li>
+            <ul>
+                <li>sublist item one</li> <!--grandchild of ol-tag-->
+                <li>sublist item two</li>
+            </ul>
+            <li>list item three</li>
+        </ol>
+        <ul>
+            <li>second list here</li>
+            <li>another item</li>
+        </ul>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+%message { /* creating a tempelate */
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.success {
+    @extend %message; /* inherit from message tempelate and extend it by adding some modifications */
+    $success_color: lightgreen;
+    background-color: $success_color;
+    border: 1px solid $success_color;
+}
+
+.warning {
+    @extend %message;
+    $warning_color: lightgoldenrodyellow;
+    background-color: $warning_color;
+    border: 1px solid $warning_color;
+}
+
+.error {
+    @extend %message;
+    $error_color: lightcoral;
+    background-color: $error_color;
+    border: 1px solid $error_color;
+}
