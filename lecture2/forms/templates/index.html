@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    First Page
+{% endblock %}
+
+{% block body %}
+    <form action="{{ url_for('hello') }}" method="post"> <!--use the request method="post" instead of the default method="get"-->
+        <input type="text" name="name" placeholder="Enter Your Name">
+        <button>Submit</button>
+    </form>
+    <!--
+    If replace "post" with "get", the "name" variable submitted via the form will be displayed in the address bar.
+    If password submitted, it will be shown in the url history, not sectrure!
+    -->
+{% endblock %}
