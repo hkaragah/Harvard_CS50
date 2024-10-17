@@ -4,11 +4,12 @@ from flask import Flask, app, render_template, request
 from models import *
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("HARVARD_CS50_LECTURE4_DB_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app) # Tie this database to this Flask app
 
 def main():
+    
     # Create tables based on each class that inherits from db.Model
     db.create_all()
     
