@@ -66,5 +66,5 @@ SQL: SELECT * FROM flights WHERE origin = "Paris" OR duration > 500;
 FLASK: flights = Flight.query.filter(or_(Flight.origin == "Paris", Flight.duration > 500)).all()
 
 SQL: SELECT * FROM flights JOIN passengers ON flights.id = passengers.flight_id;
-FLASK: flights = Flight.query.join(Passenger).filter(Passenger.flight_id == Flight.id).all()
+FLASK: flights = db.session.query(Flight, Passenger).filter(Passenger.flight_id == Flight.id).all()
 """
