@@ -1,0 +1,115 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDOF Dynamic Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: none;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SDOF Dynamic Analysis</h1>
+        <form id="sdofForm">
+            <div class="form-group">
+                <label for="mass">Mass (kg):</label>
+                <input type="number" id="mass" name="mass" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="stiffness">Stiffness (N/m):</label>
+                <input type="number" id="stiffness" name="stiffness" step="0.1" required>
+            </div>
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        document.getElementById('sdofForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const mass = document.getElementById('mass').value;
+            const stiffness = document.getElementById('stiffness').value;
+            const resultsDiv = document.getElementById('results');
+            
+            try {
+                const response = await fetch('/calculate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ mass, stiffness })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultsDiv.style.display = 'block';
+                    resultsDiv.innerHTML = `
+                        <h3>Results:</h3>
+                        <p>Natural Period (T): ${data.natural_period} seconds</p>
+                        <p>Natural Frequency (ω): ${data.natural_frequency} rad/s</p>
+                    `;
+                } else {
+                    resultsDiv.style.display = 'block';
+                    resultsDiv.innerHTML = `<p class="error">Error: ${data.error}</p>`;
+                }
+            } catch (error) {
+                resultsDiv.style.display = 'block';
+                resultsDiv.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
