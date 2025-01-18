@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+
+        // Function to change heading to say goodbye
+        function hello() {
+            document.querySelector("h1").innerHTML = "Goodbye!";
+            // "document" refers to the whole html document
+            // "querySelector" is a function that selects the first element that matches the given selector
+            // "innerHTML" is the content of the element
+        }
+
+    </script>
+    <title>My Website</title>
+  </head>
+  <body>
+    <h1>Welcome!</h1>
+    <button onclick="hello()">Click Here</button>
+  </body>
+</html>
