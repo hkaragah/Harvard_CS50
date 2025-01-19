@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+
+            document.addEventListener('DOMContentLoaded', function() {
+                
+                // Have each button change the color of the heading
+                document.querySelectorAll('.color-change').forEach(function(button) { 
+                    // "forEach" is a function that calls a provided function once for each element in an array, in order.   
+                    button.onclick = function() {
+                        document.querySelector('#hello').style.color = button.dataset.color;
+                    };
+                });
+            });
+
+        </script>
+
+        <title>My Website</title>
+
+    </head>
+    <body>
+
+        <h1 id="hello">Hello!</h1>
+        <button class="color-change" data-color="red">Red</button>
+        <button class="color-change" data-color="blue">Blue</button>
+        <button class="color-change" data-color="green">Green</button>
+        <!-- 
+            "data-color" is a custom attribute (a data attribute) 
+            that can be used to store extra information.
+            To store data in an HTML element, we can use data attributes.
+            It should start with "data-" followed by the name of the data attribute.
+            The value of the data attribute can be accessed using the "dataset" property.
+            The data will not be displayed on the page, but it can be used by JavaScript.
+        -->
+
+
+    </body>
+</html>

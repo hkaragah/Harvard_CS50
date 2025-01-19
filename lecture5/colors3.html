@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+
+            document.addEventListener('DOMContentLoaded', () => {
+                
+                document.querySelector('#color-change').onchange = function() { 
+                    document.querySelector('#hello').style.color = this.value;
+                    // "this" refers to the element that fired the event
+                    // here it refers to "color-change" select element
+                    // Arrow function here is not used because we need to access "this" keyword
+                    // So using arrow function will not have the same effect as using regular function
+                };
+                });
+
+        </script>
+
+        <title>My Website</title>
+
+    </head>
+    <body>
+
+        <h1 id="hello">Hello!</h1>
+        <select id="color-change">
+            <option value="black">Black</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+        </select>
+    </body>
+</html>
