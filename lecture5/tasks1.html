@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+
+            document.addEventListener('DOMContentLoaded', () => {
+
+                // Disable submit button by default
+                document.querySelector('#submit').disabled = true;
+
+                // Use the following if only defined the input "type" without "id"
+                // document.querySelector("#new-task input[type='submit']").disabled = true;
+
+                // Enable button only if there is text in the input field
+                document.querySelector('#task').onkeyup = () => {
+                    if (document.querySelector('#task').value.length > 0)
+                        document.querySelector('#submit').disabled = false;
+                    else
+                        document.querySelector('#submit').disabled = true;
+                };
+
+                document.querySelector('#new-task').onsubmit = () => {
+
+                    // Create new list item with tag <li>
+                    const li = document.createElement('li');
+                    li.innerHTML = document.querySelector('#task').value;
+
+                    // Add new task to tasks list
+                    document.querySelector('#tasks').append(li);
+
+                    // Clear input field and disable submit button again
+                    document.querySelector('#task').value = '';
+                    document.querySelector('#submit').disabled = true;
+                    document.querySelector('#task').focus();
+
+                    // Stop form from submitting to some other page
+                    return false;
+                };
+            });
+
+        </script>
+        <title>Tasks</title>
+    </head>
+    <body>
+        <h1>Tasks</h1>
+        <ul id="tasks">
+        </ul>
+        <form id="new-task">
+            <input id="task" autocomplete="off" autofocus placeholder="New Task" type="text">
+            <input id="submit" type="submit">
+            <!-- use button instead of input type="submit" to prevent page reload:
+                <button id="submit">Submit</button>
+            -->
+        </form>
+    </body>
+</html>

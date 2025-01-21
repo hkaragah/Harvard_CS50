@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelector('#new-task').onsubmit = () => {
+
+                    // Create new list item with tag <li>
+                    const li = document.createElement('li');
+                    li.innerHTML = document.querySelector('#task').value;
+
+                    // Add new task to tasks list
+                    document.querySelector('#tasks').append(li);
+
+                    // Clear input field
+                    document.querySelector('#task').value = '';
+
+                    // Stop form from submitting to some other page.
+                    // Usually, when a form is submitted, 
+                    // the data is sent to a server to be processed
+                    // and the browser is redirected to a new page (gets refreshed).
+                    // Here, I want to stay on the same page.
+                    return false;
+                };
+            });
+
+        </script>
+        <title>Tasks</title>
+    </head>
+    <body>
+        <h1>Tasks</h1>
+        <ul id="tasks">
+        </ul>
+        <form id="new-task">
+            <input id="task" autocomplete="off" autofocus placeholder="New Task" type="text">
+            <input type="submit">
+        </form>
+    </body>
+</html>

@@ -37,3 +37,7 @@ Arrow Functions (ES6 version of Javascript):
 - Example of a function that takes an input and return a value almost right a way:
 
     x => x * 2
+
+
+Ajax (Asyncronous Javascript and XML): 
+- helps to get more information from a server even without needing to reload an entire new page

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+
+            document.addEventListener('DOMContentLoaded', () => {
+                setInterval(count, 1000);
+                // "setInterval" is a built-in JavaScript function 
+                // that calls the function "count" 
+                // and evaluates an expression at specified intervals (in milliseconds).
+            });
+
+            let counter = 0;
+
+            function count() {
+                counter++;
+                document.querySelector('#counter').innerHTML = counter;
+            }
+
+        </script>
+        <title>My Website</title>
+    </head>
+    <body>
+        <h1 id="counter">0</h1>
+    </body>
+</html>
