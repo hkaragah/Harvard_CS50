@@ -41,3 +41,11 @@ Arrow Functions (ES6 version of Javascript):
 
 Ajax (Asyncronous Javascript and XML): 
 - helps to get more information from a server even without needing to reload an entire new page
+
+Socket.IO
+- A Javascript library that lets us do real-time communication
+- Modern web browsers support web sockets 
+    which allow for a protocol that allow for 
+    full-duplex communication between client and server 
+    simultanously that allow for real-time communication
+

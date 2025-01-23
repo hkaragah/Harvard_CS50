@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--<script type="text/javascript" src="//cdnjs.cloudflar.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+        <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+        <script src="{{ url_for('static', filename='index.js') }}"></script>
+        <title>Vote</title>
+    </head>
+    <body>
+        <ul id="votes">
+
+        </ul>
+        <hr>
+        <button data-vote="yes">Yes</button> <!-- data-vote is a custom attribute -->
+        <button data-vote="no">No</button>
+        <button data-vote="maybe">Maybe</button>
+    </body>
+</html>

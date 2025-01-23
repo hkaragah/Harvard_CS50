@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <!--<script type="text/javascript" src="//cdnjs.cloudflar.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+        <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+        <script src="{{ url_for('static', filename='index.js') }}"></script>
+        <title>Vote</title>
+    </head>
+    <body>
+        <!-- "votes" variable is passed to index.html in app.py-->
+        <div>Yes Votes: <span id="yes">{{ votes["yes"] }}</span></div>
+        <div>No Votes: <span id="no">{{ votes["no"] }}</span></div>
+        <div>Maybe Votes: <span id="maybe">{{ votes["maybe"] }}</span></div>
+        <hr>
+        <button data-vote="yes">Yes</button> <!-- data-vote is a custom attribute -->
+        <button data-vote="no">No</button>
+        <button data-vote="maybe">Maybe</button>
+    </body>
+</html>
