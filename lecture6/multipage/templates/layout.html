@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Webpage</title>
+</head>
+<body>
+    <ul>
+        <li><a href="{{ url_for('first') }}">First</a></li>
+        <li><a href="{{ url_for('second') }}">Second</a></li>
+        <li><a href="{{ url_for('third') }}">Third</a></li>
+    </ul>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

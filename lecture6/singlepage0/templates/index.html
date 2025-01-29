@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage</title>
+        <script>
+
+            document.addEventListener("DOMContentLoaded", () => {
+                
+                // Start by loading first page
+                load_page('first');
+
+                // Set links up to load new pages
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.onclick = () => {
+                        load_page(link.dataset.page); 
+                        // "link" is the link that was clicked, and "dataset" is a property 
+                        // that contains all the data attributes of the element.
+                        // "page" is the name of the page to load, 
+                        // which is stored in a data attribute of the link element.
+                        // This will return the value of the "data-page" attribute of 
+                        // the link element that was clicked.
+                        return false; // prevent default action of link
+                    }
+                });
+            });
+
+            // Renders contents of new page in main view
+            function load_page(name) { // "name" is the name of the page to load
+                // send a request to the server (flask app) for the page info
+                const request = new XMLHttpRequest();
+                request.open('GET', `/${name}`); // template literal syntax is used to create a string that includes the value of the variable "name"   
+                request.onload = () => {
+                    const response = request.responseText;
+                    document.querySelector('#body').innerHTML = response;
+                }
+                request.send();
+            }
+
+        </script>
+    </head>
+    <body>
+        <ul>
+            <li><a href="" class="nav-link" data-page="fisrt">First Page</a></li>
+            <li><a href="" class="nav-link" data-page="second">Second Page</a></li>
+            <li><a href="" class="nav-link" data-page="third">Third Page</a></li>
+            <!-- notice that href attribute is missing, that's where the JS comes into play-->
+        </ul>
+        <hr>
+        <div id="body">
+        </div>
+    </body>
+</html>
