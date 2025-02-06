@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>My Webpage</title>
+        <style>
+            .post {
+                background-color: #77dd11;
+                padding: 20px;
+                margin: 10px;
+            }
+
+            body {
+                padding-bottom: 50px;
+            }
+
+            .hide {
+                float: right;
+            }
+        </style>
+
+        <!-- Include Handlebars library -->
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+
+        <!-- Template for the "post" and the "hide button" -->
+        <script id="post" type="text/x-handlebars-template">
+            <div class="post">
+                <!-- This "raw" block is used to tell flask to ignore this template
+                 which would otherwise be filled in by some values using jinja and flask -->
+                {% raw -%} 
+                    {{ contents }}
+                {%- endraw %}
+                <button class="hide">Hide</button>
+            </div>
+        </script>
+
+        <script>
+
+            // Start with first post
+            let counter = 1;
+
+            // Load posts 20 at a time
+            const quantity = 20;
+
+            // When DOM loads, load first 20 posts
+            document.addEventListener('DOMContentLoaded', load);
+
+            // If scrolled to bottom, load next set of posts
+            window.onscroll = () => {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                    load();
+                }
+            };
+
+            function load() {
+
+                // Set start and end post numbers, and update counter
+                const start = counter;
+                const end = start + quantity - 1;
+                counter = end + 1;
+
+                // Open new request to get new posts
+                const request = new XMLHttpRequest();
+                request.open('POST', '/posts');
+                request.onload = () => {
+                    const data = JSON.parse(request.responseText);
+                    data.forEach(add_post); 
+                    // for each item in data, call add_post function
+                    // which will add the post to the DOM (page)
+                };
+
+                // Add start and end points to request data
+                const data = new FormData();
+                data.append('start', start);
+                data.append('end', end);
+
+                // Send request
+                request.send(data);
+            }
+
+            // Add a new post with given contents to DOM
+            const post_template = Handlebars.compile(document.querySelector('#post').innerHTML);
+            function add_post(contents) { // This will run 20 times
+
+                // Create new post template
+                const post = post_template({'contents': contents});
+
+                // Add post to DOM
+                document.querySelector('#posts').innerHTML += post;
+
+                // Select all "hide" buttons and attach event listeners
+                document.querySelectorAll('.hide').forEach(button => {
+                    button.onclick = function() {
+                        this.parentElement.remove();
+                    };
+                });
+            }
+
+        </script>
+    </head>
+    <body>
+        <div id="posts">
+        </div>
+    </body>
+</html>

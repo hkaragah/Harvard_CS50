@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage</title>
+        <style>
+            .posts {
+                background-color: #77dd11;
+                padding: 20px;
+                margin: 10px;
+            }
+
+            body {
+                padding-bottom: 50px;
+            }
+        </style>
+        <script>
+
+            // Start with first post
+            let counter = 1;
+
+            // Load posts 20 at a time
+            const quantity = 20;
+
+            // When DOM loads, load first 20 posts
+            document.addEventListener('DOMContentLoaded', load);
+
+            // If scrolled to bottom, load next set of posts
+            window.onscroll = () => {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                    load();
+                }
+            };
+
+            function load() {
+
+                // Set start and end post numbers, and update counter
+                const start = counter;
+                const end = start + quantity - 1;
+                counter = end + 1;
+
+                // Open new request to get new posts
+                const request = new XMLHttpRequest();
+                request.open('POST', '/posts');
+                request.onload = () => {
+                    const data = JSON.parse(request.responseText);
+                    data.forEach(add_post); 
+                    // for each item in data, call add_post function
+                    // which will add the post to the DOM (page)
+                };
+
+                // Add start and end points to request data
+                const data = new FormData();
+                data.append('start', start);
+                data.append('end', end);
+
+                // Send request
+                request.send(data);
+            }
+
+            // Add a new post with given contents to DOM
+            function add_post(contents) { // This will run 20 times
+
+                // Create new post
+                const post = document.createElement('div');
+                post.className = 'posts';
+                post.innerHTML = contents;
+
+                // Add post to DOM
+                document.querySelector('#posts').append(post);
+            }
+
+        </script>
+    </head>
+    <body>
+        <div id="posts">
+        </div>
+    </body>
+</html>

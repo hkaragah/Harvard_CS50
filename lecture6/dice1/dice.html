@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dice Game</title>
+       
+        <style>
+            #rolls img {
+                width: 30px; /* Adjust as needed */
+                height: auto; /* Maintains aspect ratio */
+            }
+        </style>
+
+        <!-- Include Handlebars library -->
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+
+        <script>
+            
+
+            // Template for roll results
+            // Similar to Jinja2 in Python (flask or server-side template)
+            // Handlebar is a client-side template
+            const template = Handlebars.compile("<li>You rolled: <img src=\"img/{{ value }}.png\"></li>");
+
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelector("#roll").onclick = () => {
+
+                    // Generate a random number between 1 and 6
+                    const roll = Math.floor((Math.random() * 6) + 1);
+
+                    // Add roll result to DOM
+                    const content = template({"value": roll});
+                    document.querySelector("#rolls").innerHTML += content;
+                };
+            })
+
+        </script>
+    </head>
+    <body>
+        <button id="roll">Roll</button>
+        <ul id="rolls"></ul>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dice Game</title>
+       
+        <style>
+            #rolls img {
+                width: 30px; /* Adjust as needed */
+                height: auto; /* Maintains aspect ratio */
+                vertical-align: middle; /* Aligns image with text */
+            }
+        </style>
+
+        <!-- Include Handlebars library -->
+        <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+
+        <!--Inside script tag is the HTML code to represent 
+        the handlebars template that I want to create-->
+        <script id="result" type="text/x-handlebars-template">
+            <li>
+                You rolled: 
+                <img alt="{{ value }}" title="{{ value }}" src="img/{{ value }}.png">
+            </li>
+        </script>
+
+        <script>
+            
+            // Get the inner HTML of the template defined in the above script tag
+            const template = Handlebars.compile(document.querySelector("#result").innerHTML);
+
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelector("#roll").onclick = () => {
+
+                    // Generate a random number between 1 and 6
+                    const roll = Math.floor((Math.random() * 6) + 1);
+
+                    // Add roll result to DOM
+                    const content = template({"value": roll});
+                    document.querySelector("#rolls").innerHTML += content;
+                };
+            })
+
+        </script>
+    </head>
+    <body>
+        <button id="roll">Roll</button>
+        <ul id="rolls"></ul>
+    </body>
+</html>
